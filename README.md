@@ -1,2 +1,3 @@
-# ag_backend
-Agroghala backend revamp
+# Agroghala backend
+### Agroghala backend revamp
+This is the Agroghala backend done in django.
