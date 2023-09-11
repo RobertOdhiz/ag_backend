@@ -1,0 +1,61 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row justify-content-center mt-5 border">
+            <div class="">
+                <h2 class="text-center">Sign Up today</h2>
+                <form>
+
+                    <!-- First Name -->
+                    <div class="input-group position-relative">
+                        <input type="text" id="firstName" name="firstName" required>
+                        <label for="firstName" class='position-absolute'>First Name</label>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="input-group position-relative">
+                        <input type="text" id="lastName" name="lastName" required>
+                        <label for="lastName" class='position-absolute'>Last Name</label>
+
+                    </div>
+                
+                    <!-- Email -->
+                    <div class="input-group position-relative">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email" class='position-absolute'>Email</label>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="input-group position-relative">
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                        <label for="phoneNumber" class='position-absolute'>Phone Number</label>
+                    </div>
+                
+                    <div>
+                    <!-- Address -->
+                    <div class="input-group position-relative">
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                        <label for="Address" class='position-absolute'>Address</label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group position-relative">
+                        <input type="password" id="password" name="password" required>
+                        <label for="password" class='position-absolute'>Password</label>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-group position-relative">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <label for="confirmPassword" class='position-absolute'>Confirm Password</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
