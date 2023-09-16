@@ -49,6 +49,6 @@ def validate_unique_rating(value):
 
 # Usage in your Rating model:
 class Rating(models.Model):
-    ghala = models.ForeignKey(Ghala, on_delete=models.CASCADE, related_name='ratings')
+    ghala = models.ManyToManyField(Ghala, related_name='ratings')
     user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(validators=[validate_rating, validate_unique_rating])

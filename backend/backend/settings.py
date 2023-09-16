@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'soko',
     'rest_framework',
     'rest_framework_simplejwt',
+    'myghala',
 ]
 
 MIDDLEWARE = [

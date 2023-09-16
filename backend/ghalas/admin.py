@@ -6,8 +6,8 @@ class GhalaAdmin(admin.ModelAdmin):
     search_fields = ('ghala_name', 'phone_number', 'email')
 
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ('ghala_id', 'user_id', 'rating')
-    list_filter = ('ghala_id', 'user_id')
+    list_display = ('user_id', 'rating')
+    list_filter = ('user_id',)
 
 
 
