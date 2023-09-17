@@ -6,8 +6,8 @@ from .views import (GhalaListCreateView,
                     )
 
 urlpatterns = [
-    path('ghalas/', GhalaListCreateView.as_view(), name='ghala-list-create'),
-    path('ghalas/<int:pk>/', GhalaRetrieveUpdateDestroyView.as_view(), name='ghala-detail'),
+    path('', GhalaListCreateView.as_view(), name='ghala-list-create'),
+    path('<int:pk>/', GhalaRetrieveUpdateDestroyView.as_view(), name='ghala-detail'),
     path('ratings/', RatingListCreateView.as_view(), name='rating-list-create'),
     path('ratings/<int:pk>/', RatingRetrieveUpdateDestroyView.as_view(), name='rating-detail'),
 ]

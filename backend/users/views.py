@@ -5,6 +5,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import NewUser
 from .serializers import CustomLoginSerializer, UserSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.permissions import IsAuthenticated
 
 NewUser = get_user_model()
 
@@ -57,3 +58,12 @@ class ListUsers(APIView):
         users = NewUser.objects.all()
         usernames = [user.email for user in users]
         return Response(usernames)
+    
+
+class GetUserDetails(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user  # Get the authenticated user
+        serialized_user = UserSerializer(user)  # Replace with your user serializer
+        return Response(serialized_user.data, status=status.HTTP_200_OK)

@@ -6,8 +6,7 @@ class Soko(models.Model):
     commodity = models.CharField(max_length=255, blank=False)
     price = models.IntegerField(default=0)
     image = models.ImageField(upload_to="images/")
-    ghala = models.ForeignKey(Ghala, on_delete=models.CASCADE)
-    user = models.ForeignKey(NewUser, on_delete=models.CASCADE)
+    ghala = models.ManyToManyField(Ghala)
 
     def __str__(self):
         return self.commodity

@@ -6,6 +6,9 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 class CustomAccountManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password, **other_fields):
 
+        other_fields.setdefault('is_active', True)
+        other_fields.setdefault('is_farmer', True)
+
         if not email:
             raise ValueError(gettext_lazy("Please provide an email address"))
 
@@ -38,7 +41,7 @@ class CustomAccountManager(BaseUserManager):
         if other_fields.get('is_farmer') is not True:
             raise ValueError('A farmer must be assigned to is_farmer=True')
 
-        return self.create_user(email, first_name, last_name, password, other_fields)
+        return self.create_user(email, first_name, last_name, password, **other_fields)
         
 
 

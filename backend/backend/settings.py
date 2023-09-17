@@ -29,11 +29,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'ghalas',
-    'blogs',
     'soko',
     'rest_framework',
     'rest_framework_simplejwt',
     'myghala',
+    'Profile',
+    'mysoko',
+    'feedback',
+    'blog',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -44,9 +48,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+]
 
 TEMPLATES = [
     {
@@ -142,3 +153,4 @@ AUTH_USER_MODEL = 'users.NewUser'
 # Media settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
