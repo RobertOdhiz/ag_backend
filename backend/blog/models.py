@@ -7,6 +7,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=1000, blank=True)
     content = models.TextField()
     reads = models.IntegerField(default=0)
+    image = models.ImageField(upload_to="blog/images/", default='blogdefault.jpg', blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
