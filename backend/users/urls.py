@@ -10,4 +10,6 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('me/', views.ManageUserView.as_view(), name='me'),
     path('get-user-details/', views.GetUserDetails.as_view(), name='get-user-details'),
+    path('logout/blacklist/', views.BlacklistTokenUpdateView.as_view(),
+         name='blacklist')
 ]

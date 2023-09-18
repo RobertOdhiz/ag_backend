@@ -56,8 +56,8 @@ class ListUsers(APIView):
         Return a list of all users.
         """
         users = NewUser.objects.all()
-        usernames = [user.email for user in users]
-        return Response(usernames)
+        emails = [user.email for user in users]
+        return Response(emails)
     
 
 class GetUserDetails(APIView):
@@ -65,5 +65,19 @@ class GetUserDetails(APIView):
 
     def get(self, request):
         user = request.user  # Get the authenticated user
-        serialized_user = UserSerializer(user)  # Replace with your user serializer
-        return Response(serialized_user.data, status=status.HTTP_200_OK)
+        user_data = {'id': user.id}  # Create a dictionary with only the 'id' field
+        return Response(user_data, status=status.HTTP_200_OK)
+
+
+class BlacklistTokenUpdateView(APIView):
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = ()
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)

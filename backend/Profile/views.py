@@ -6,9 +6,9 @@ from .serializers import FarmerProfileSerializer
 class FarmerProfileListCreateView(generics.ListCreateAPIView):
     queryset = FarmerProfile.objects.all()
     serializer_class = FarmerProfileSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 class FarmerProfileRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = FarmerProfile.objects.all()
     serializer_class = FarmerProfileSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]

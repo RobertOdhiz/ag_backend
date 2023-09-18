@@ -53,14 +53,14 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(default="", max_length=250)
     reg_date = models.DateTimeField(default=timezone.now)
     is_staff = models.BooleanField(default=False)
-    is_farmer = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_farmer = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
 
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
         full_name = self.first_name + ' ' + self.last_name
