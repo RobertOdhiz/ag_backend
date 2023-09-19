@@ -3,25 +3,31 @@ from rest_framework import viewsets
 from .models import Ghala, Rating
 from .serializers import GhalaSerializer, RatingSerializer
 from django.db.models import Q
+from rest_framework.permissions import IsAuthenticated
 
 
 class GhalaListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Ghala.objects.all()
     serializer_class = GhalaSerializer
 
 class GhalaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Ghala.objects.all()
     serializer_class = GhalaSerializer
 
 class RatingListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 
 class RatingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 
 class GhalaSearchViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Ghala.objects.all()
     serializer_class = GhalaSerializer
 
