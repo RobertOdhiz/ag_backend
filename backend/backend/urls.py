@@ -18,6 +18,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/user/', include('users.urls')),
     path('api/myghalas/', include('myghala.urls')),
+    path('api/mysoko/', include('mysoko.urls')),
     path('api/sokos/', include('soko.urls')),
     path('api/profiles/', include('Profile.urls')),
     path('api/', include('blog.urls')),

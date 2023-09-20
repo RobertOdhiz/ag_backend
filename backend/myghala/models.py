@@ -16,7 +16,7 @@ class MyGhala(models.Model):
     def __str__(self):
         renter = "Rented by {}".format(self.user.first_name)
         return renter
-    
+
     '''''
     def subtract_bags_sold(self):
         # Iterate through commodities stored in this MyGhala

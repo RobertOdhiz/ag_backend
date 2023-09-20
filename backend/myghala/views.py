@@ -1,11 +1,22 @@
 from rest_framework import generics
 from .models import MyGhala
-from .serializers import MyGhalaSerializer  
+from .serializers import MyGhalaSerializer
 
 class MyGhalaListCreateView(generics.ListCreateAPIView):
-    queryset = MyGhala.objects.all()
     serializer_class = MyGhalaSerializer
 
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return MyGhala.objects.filter(user=self.request.user)
+        else:
+            return MyGhala.objects.none()
+
 class MyGhalaRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = MyGhala.objects.all()
     serializer_class = MyGhalaSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return MyGhala.objects.filter(user=self.request.user)
+        else:
+            return MyGhala.objects.none()
+

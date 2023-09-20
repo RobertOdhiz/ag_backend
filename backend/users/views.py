@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions, generics, status
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import NewUser
-from .serializers import CustomLoginSerializer, UserSerializer
+from .serializers import CustomLoginSerializer, UserSerializer, UserIDSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 
@@ -34,7 +34,7 @@ class CustomTokenObtainPairView(APIView):
 
 class ManageUserView(generics.RetrieveUpdateAPIView):
     """Manage the authenticated user"""
-    serializer_class = UserSerializer
+    serializer_class = UserIDSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_object(self):
