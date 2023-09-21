@@ -7,6 +7,10 @@ class MyGhalaSerializer(serializers.ModelSerializer):
     user_last_name = serializers.SerializerMethodField()
     ghala_name = serializers.SerializerMethodField()
     commodity_name = serializers.SerializerMethodField()
+    commodity_price = serializers.SerializerMethodField()
+
+    def get_commodity_price(self, obj):
+        return obj.commodity_stored.first().price
 
     def get_user_first_name(self, obj):
         return obj.user.first_name
