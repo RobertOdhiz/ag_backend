@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import MySoko
 
 class MySokoSerializer(serializers.ModelSerializer):
-    user_id = serializers.SerializerMethodField()
+    user_id = serializers.ReadOnlyField(source='user.id')
     user_first_name = serializers.SerializerMethodField()
     user_last_name = serializers.SerializerMethodField()
     ghala_name = serializers.SerializerMethodField()
@@ -18,9 +18,6 @@ class MySokoSerializer(serializers.ModelSerializer):
     
     def get_date_sold(self, obj):
         return obj.date_sold.first().date_sold
-    
-    def get_user_id(self, obj):
-        return obj.user.user_id
 
     def get_user_last_name(self, obj):
         return obj.user.last_name
