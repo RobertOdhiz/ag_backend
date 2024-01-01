@@ -1,6 +1,7 @@
 from rest_framework import generics
 from .models import MyGhala
 from .serializers import MyGhalaSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class MyGhalaListCreateView(generics.ListCreateAPIView):
     serializer_class = MyGhalaSerializer

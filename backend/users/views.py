@@ -7,6 +7,7 @@ from .serializers import CustomLoginSerializer, UserSerializer, UserIDSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 NewUser = get_user_model()
 
@@ -75,6 +76,7 @@ class ListUsers(APIView):
 
 class GetUserDetails(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request):
         user = request.user  # Get the authenticated user
