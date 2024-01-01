@@ -1,4 +1,4 @@
-from .models import NewUser
+# serializers.py
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
@@ -15,12 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
 class UserIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewUser
-        fields =("id",)
+        fields = ("id",)
 
 class CustomLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
-    
 
     def validate(self, attrs):
         email = attrs.get('email')
@@ -39,4 +38,3 @@ class CustomLoginSerializer(serializers.Serializer):
             return attrs
         else:
             raise serializers.ValidationError('Both email and password are required')
-        

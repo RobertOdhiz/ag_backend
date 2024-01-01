@@ -6,6 +6,7 @@ from .models import NewUser
 from .serializers import CustomLoginSerializer, UserSerializer, UserIDSerializer
 from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.hashers import make_password
 
 NewUser = get_user_model()
 
@@ -13,6 +14,18 @@ class CreateUserView(generics.CreateAPIView):
     """Create a new user in the system"""
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
+
+    def perform_create(self, serializer):
+        """
+        Perform the creation of a User instance.
+
+        Hashes the password before saving the user.
+
+        Parameters:
+        - serializer: UserSerializer instance.
+        """
+        # Hash the password before saving the user
+        serializer.save(password=make_password(serializer.validated_data['password']))
 
 class CustomTokenObtainPairView(APIView):
     """Custom view to obtain an access token and refresh token"""

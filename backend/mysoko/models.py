@@ -12,7 +12,6 @@ class MySoko(models.Model):
     bags_sold = models.IntegerField(default=0)
     date_sold = models.DateTimeField(default=timezone.now)
 
-
     def clean(self):
         # Check if the commodity_sold exists in the associated MyGhala
         if self.commodity_sold not in self.my_ghala.commodity_stored.all():
@@ -21,8 +20,8 @@ class MySoko(models.Model):
         # Check if the user is the owner of the MyGhala
         if self.user != self.my_ghala.user:
             raise ValidationError("You can only sell from your own MyGhala.")
-        
-         # Check if bags_sold is greater than bags_stored
+
+        # Check if bags_sold is greater than bags_stored
         if self.bags_sold > self.my_ghala.bags_stored:
             raise ValidationError("Bags sold cannot exceed bags stored in MyGhala.")
 
@@ -33,6 +32,5 @@ class MySoko(models.Model):
         return self.bags_sold * self.commodity_sold.price
 
     def update_bags_stored(self, bags_added):
-        my_ghala_entry, created = MyGhala.objects.get_or_create(user=self.user, ghala=self.commodity_sold.ghala)
-        my_ghala_entry.bags_stored += bags_added
-        my_ghala_entry.save()
+        self.my_ghala.bags_stored += bags_added
+        self.my_ghala.save()

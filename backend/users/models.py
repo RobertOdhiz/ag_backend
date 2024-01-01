@@ -1,3 +1,4 @@
+# models.py
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy
@@ -5,7 +6,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 
 class CustomAccountManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password, **other_fields):
-
         other_fields.setdefault('is_active', True)
         other_fields.setdefault('is_farmer', True)
 
@@ -13,11 +13,10 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(gettext_lazy("Please provide an email address"))
 
         email = self.normalize_email(email)
-        user = self.model(email=email, first_name=first_name,
-                        last_name=last_name, **other_fields)
+        user = self.model(email=email, first_name=first_name, last_name=last_name, **other_fields)
         user.set_password(password)
         user.save()
-
+        print(f"Created user with hashed password: {user.password}")
         return user
 
     def create_superuser(self, email, first_name, last_name, password, **other_fields):
@@ -32,17 +31,9 @@ class CustomAccountManager(BaseUserManager):
         if other_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must be assigned to is_superuser=True')
 
-        return self.create_user(email, first_name, last_name, password, **other_fields)
-
-    def create_farmer(self, email, first_name, last_name,password, **other_fields):
-        
-        other_fields.setdefault('is_farmer', True)
-
-        if other_fields.get('is_farmer') is not True:
-            raise ValueError('A farmer must be assigned to is_farmer=True')
-
-        return self.create_user(email, first_name, last_name, password, **other_fields)
-        
+        user = self.create_user(email, first_name, last_name, password, **other_fields)
+        print(f"Created superuser with hashed password: {user.password}")
+        return user
 
 
 class NewUser(AbstractBaseUser, PermissionsMixin):
@@ -65,4 +56,4 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         full_name = self.first_name + ' ' + self.last_name
         return full_name
-    
+
