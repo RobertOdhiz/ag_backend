@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-dzh9em5&c@1=rrul=x6jj+q7(_4=94!dt553^s0m)lk^+elxzy
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['agroghala.alxrob.tech']
 
 
 # Application definition
@@ -156,4 +156,16 @@ AUTH_USER_MODEL = 'users.NewUser'
 # Media settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# HSTS Security
+SECURE_HSTS_SECONDS = 259200  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+
+#Turn on header with it's default value
+MIDDLEWARE += ["csp.middleware.CSPMiddleware"]
+
 
