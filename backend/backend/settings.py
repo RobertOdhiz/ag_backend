@@ -28,17 +28,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-    'ghalas',
-    'soko',
+    'Profile',
     'rest_framework',
     'rest_framework_simplejwt',
-    'myghala',
-    'Profile',
-    'mysoko',
     'feedback',
     'blog',
     'corsheaders',
     'rest_framework_simplejwt.token_blacklist',
+    'basemodel',
+    'blogcategories'
 ]
 
 MIDDLEWARE = [
@@ -57,7 +55,7 @@ ROOT_URLCONF = 'backend.urls'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
+    "http://*", "https://*"
 ]
 
 TEMPLATES = [

@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.authentication import JWTAuthentication
+import json
 
 NewUser = get_user_model()
 
@@ -37,11 +38,21 @@ class CustomTokenObtainPairView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         refresh = RefreshToken.for_user(user)
-        response = Response({
+        user_data = {
+            'user_id': str(user.id),
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-        }, status=status.HTTP_200_OK)
-        response['Authorization'] = f'Bearer {refresh.access_token}'
+        }
+        json_data = json.dumps(user_data)
+        response = Response(status=status.HTTP_200_OK)
+        response.set_cookie(
+            key='auth_cookie',
+            value=json_data,
+            secure=False,
+            max_age=60 * 60 * 24 * 7,  # 7 days
+            httponly=True
+        )
+        # response['Authorization'] = f'Bearer {refresh.access_token}'
 
         return response
 
@@ -54,24 +65,6 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
     def get_object(self):
         """Retrieve and return the authenticated user"""
         return self.request.user
-
-class ListUsers(APIView):
-    """
-    View to list all users in the system.
-
-    * Requires token authentication.
-    * Only admin users are able to access this view.
-    """
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAdminUser]
-
-    def get(self, request, format=None):
-        """
-        Return a list of all users.
-        """
-        users = NewUser.objects.all()
-        emails = [user.email for user in users]
-        return Response(emails)
     
 
 class GetUserDetails(APIView):

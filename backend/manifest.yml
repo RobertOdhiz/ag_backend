@@ -1,4 +1,0 @@
-applications:
-- name: agroghala
-  memory: 256M
-  instances: 1

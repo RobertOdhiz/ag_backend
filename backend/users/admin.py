@@ -7,17 +7,16 @@ class UserAdminConfig(UserAdmin):
 
     search_fields = ('email', 'first_name', 'last_name',)
     list_filter = ('email', 'first_name', 'last_name', 'is_staff',
-                    'is_active', 'is_superuser', 'is_farmer', 'address')
-    ordering = ('-reg_date',)
+                    'is_active', 'is_superuser', 'is_farmer')
+    ordering = ('-created_at',)
     list_display = ('email', 'first_name', 'last_name',
                     'is_farmer', 'is_active', 'is_staff',
                     )
 
     fieldsets = (
         ('Personal', {'fields': ('email', 'first_name', 'last_name', 'password')}),
-        ('Contacts', {'fields': ('phone_number', 'address')}),
         ('Permissions', {'fields': ('is_staff', 'is_farmer', 'is_superuser', 'is_active')}),
-        ('More Details', {'fields': ('reg_date',)}),
+        ('More Details', {'fields': ('create_at', 'updated_at', 'last_login')}),
     )
 
     add_fieldsets = (

@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Feedback
+from .models import FeedBack
 
-class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ('email', 'feedback_text')
-    search_fields = ('email', 'feedback_text')
+class FeedBackAdminConfig(admin.ModelAdmin):
+    list_display = ('id', 'email')
+    search_fields = ('id', 'created_at', 'email', 'text')
 
-admin.site.register(Feedback, FeedbackAdmin)
+
+admin.site.register(FeedBack, FeedBackAdminConfig)

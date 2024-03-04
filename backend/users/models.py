@@ -1,4 +1,4 @@
-# models.py
+from basemodel.models import BaseModel
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy
@@ -16,7 +16,6 @@ class CustomAccountManager(BaseUserManager):
         user = self.model(email=email, first_name=first_name, last_name=last_name, **other_fields)
         user.set_password(password)
         user.save()
-        print(f"Created user with hashed password: {user.password}")
         return user
 
     def create_superuser(self, email, first_name, last_name, password, **other_fields):
@@ -32,17 +31,13 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError('Superuser must be assigned to is_superuser=True')
 
         user = self.create_user(email, first_name, last_name, password, **other_fields)
-        print(f"Created superuser with hashed password: {user.password}")
         return user
 
 
-class NewUser(AbstractBaseUser, PermissionsMixin):
+class NewUser(BaseModel, AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(gettext_lazy('email address'), unique=True)
     first_name = models.CharField(default="", max_length=250, blank=True)
     last_name = models.CharField(default="", max_length=250)
-    phone_number = models.IntegerField(unique=True)
-    address = models.CharField(default="", max_length=250)
-    reg_date = models.DateTimeField(default=timezone.now)
     is_staff = models.BooleanField(default=False)
     is_farmer = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)

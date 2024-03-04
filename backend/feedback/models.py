@@ -1,8 +1,7 @@
 from django.db import models
+from basemodel.models import BaseModel
 
-class Feedback(models.Model):
-    email = models.EmailField()
-    feedback_text = models.TextField()
 
-    def __str__(self):
-        return self.email
+class FeedBack(BaseModel):
+    email = models.EmailField(null=True)
+    text = models.TextField(null=False)
