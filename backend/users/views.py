@@ -52,7 +52,6 @@ class CustomTokenObtainPairView(APIView):
             max_age=60 * 60 * 24 * 7,  # 7 days
             httponly=True
         )
-        # response['Authorization'] = f'Bearer {refresh.access_token}'
 
         return response
 
